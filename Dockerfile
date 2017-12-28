@@ -67,14 +67,14 @@ ENV TF_CUDA_VERSION=9.0
 ENV TF_CUDNN_VERSION=7.0.5
 ENV TF_CUDA_COMPUTE_CAPABILITIES=7.0
 ENV TF_CUDA_CLANG=0
-ENV TF_NEED_MKL=0
-#ENV TF_DOWNLOAD_MKL=1
+ENV TF_NEED_MKL=1
+ENV TF_DOWNLOAD_MKL=1
 ENV GCC_HOST_COMPILER_PATH=/usr/bin/gcc
 ENV CC_OPT_FLAGS=-march=native
 RUN ./configure
 RUN bazel build --config=opt --config=cuda --config=mkl --incompatible_load_argument_is_label=false //tensorflow/tools/pip_package:build_pip_package
 RUN bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
-RUN pip3 install /tmp/tensorflow_pkg/tensorflow-1.4.0-py2-none-any.whl
+RUN pip3 install /tmp/tensorflow_pkg/tensorflow-1.4.1-cp35-cp35m-linux_x86_64.whl
 
 #RUN apt-get install -f
 #RUN apt-get update -y
